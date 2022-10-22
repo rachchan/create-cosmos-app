@@ -198,8 +198,12 @@ export default function Home() {
           as="h1"
           fontWeight="bold"
           fontSize={{ base: "2xl", md: "4xl" }}
+          mb={3}
         >
-          <Text as="span">Today, 14 Sep</Text>
+          <Text as="span">
+            Today, 14 Sep
+          </Text>
+
           <Text
             as="span"
             color={handleChangeColorModeValue(
@@ -287,13 +291,14 @@ export default function Home() {
           )}
           p={7}
         >
+
           <Text fontWeight="semibold">
-            Retrieved
+            Exchanged
             <Text fontWeight="normal" color="gray">
-              12:00:00
+              11:50:00
             </Text>
           </Text>
-          <Text as="span" fontWeight="bold" color="green">+0.00113388 CUDOS
+          <Text as="span" fontWeight="bold" color="gray.500">0.0058459 CUDOS
             <Text fontWeight="normal" color="gray">£10,234.23</Text>
           </Text>
         </Center>
