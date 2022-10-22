@@ -92,7 +92,7 @@ export default function Home() {
   const { getStargateClient, address, currentWallet, walletStatus } =
     useWallet();
 
-  const [balance, setBalance] = useState(new BigNumber(0));
+  const [balance, setBalance] = useState(new BigNumber(10000));
   const [isFetchingBalance, setFetchingBalance] = useState(false);
   const [resp, setResp] = useState("");
   const getBalance = async () => {
@@ -157,8 +157,30 @@ export default function Home() {
           fontWeight="extrabold"
           mb={3}
         >
-          Create Cosmos App
+          Transactions
         </Heading>
+
+        <Center mb={16}>
+          <SendTokensCard
+            isConnectWallet={walletStatus === WalletStatus.Connected}
+            balance={balance.toNumber()}
+            isFetchingBalance={isFetchingBalance}
+            response={resp}
+            sendTokensButtonText="Send Tokens"
+            handleClickSendTokens={sendTokens(
+              getStargateClient as () => Promise<SigningStargateClient>,
+              setResp as () => any,
+              address as string
+            )}
+            handleClickGetBalance={() => {
+              setFetchingBalance(true);
+              getBalance();
+            }}
+          />
+        </Center>
+
+
+
         <Heading
           as="h1"
           fontWeight="bold"
@@ -183,24 +205,6 @@ export default function Home() {
 
       <WalletSection />
 
-      <Center mb={16}>
-        <SendTokensCard
-          isConnectWallet={walletStatus === WalletStatus.Connected}
-          balance={balance.toNumber()}
-          isFetchingBalance={isFetchingBalance}
-          response={resp}
-          sendTokensButtonText="Send Tokens"
-          handleClickSendTokens={sendTokens(
-            getStargateClient as () => Promise<SigningStargateClient>,
-            setResp as () => any,
-            address as string
-          )}
-          handleClickGetBalance={() => {
-            setFetchingBalance(true);
-            getBalance();
-          }}
-        />
-      </Center>
 
       <Box mb={16}>
         <Divider />
